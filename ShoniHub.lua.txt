@@ -101,8 +101,8 @@ function loadShoniHub()
     -- === WHITELIST (mets ton pseudo Roblox ici en minuscules) ===
 getgenv().ShoniWhitelist = {
     "exta1516",      -- toi
-    "pseudoami1",    -- pote 1
-    "pseudoami2",    -- pote 2
+    "derka",    -- pote 1
+    "erttggzg876",    -- pote 2
     "pseudoami3",    -- etc...
     local function isWhitelisted(name)
         if not name then return false end
@@ -466,5 +466,6 @@ getgenv().ShoniWhitelist = {
 end
 
 createKeyGui()
+
 
 
