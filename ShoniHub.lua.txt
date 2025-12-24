@@ -99,14 +99,11 @@ end
 
 function loadShoniHub()
     -- === WHITELIST (mets ton pseudo Roblox ici en minuscules) ===
-    local MyWhitelist = {
-    "exta1516",  
-    "exta1516", 
-    "erttggzg876",
-    "potepseudo2",
-    "potepseudo3",
-    -- Ajoute autant : "autrepseudo",
-}
+getgenv().ShoniWhitelist = {
+    "exta1516",      -- toi
+    "pseudoami1",    -- pote 1
+    "pseudoami2",    -- pote 2
+    "pseudoami3",    -- etc...
     local function isWhitelisted(name)
         if not name then return false end
         return table.find(Whitelist, string.lower(name)) ~= nil
@@ -469,4 +466,5 @@ function loadShoniHub()
 end
 
 createKeyGui()
+
 
