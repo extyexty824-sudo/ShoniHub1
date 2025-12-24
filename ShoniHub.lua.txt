@@ -1,12 +1,13 @@
 -- Shoni Hub | ESP + TELEPORT + FPS + SPEED BOOST 0→28 (sans mort)
 -- =========================
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local StarterGui = game:GetService("StarterGui")
 local player = Players.LocalPlayer
 
--- === TES KEYS ICI ===
-local ValidKeys = {"Exta"}  -- Ajoute d'autres keys si tu veux : {"Exta", "key2", "key3"}
+-- TA KEY ICI
+local ValidKeys = {"Exta"}
 
 local function createKeyGui()
     local KeyGui = Instance.new("ScreenGui")
@@ -17,20 +18,18 @@ local function createKeyGui()
     local KeyFrame = Instance.new("Frame", KeyGui)
     KeyFrame.Size = UDim2.new(0, 340, 0, 240)
     KeyFrame.Position = UDim2.new(0.5, -170, 0.5, -120)
-    KeyFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    KeyFrame.BackgroundTransparency = 0.5  -- Noir ultra transparent
+    KeyFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
     KeyFrame.BorderSizePixel = 0
     Instance.new("UICorner", KeyFrame).CornerRadius = UDim.new(0, 20)
 
     local KeyStroke = Instance.new("UIStroke", KeyFrame)
-    KeyStroke.Color = Color3.fromRGB(255, 0, 0)  -- Contour rouge
-    KeyStroke.Thickness = 4
+    KeyStroke.Color = Color3.fromRGB(255, 0, 0)
+    KeyStroke.Thickness = 3
 
     local KeyTitle = Instance.new("TextLabel", KeyFrame)
     KeyTitle.Size = UDim2.new(1, 0, 0, 60)
-    KeyTitle.Position = UDim2.new(0, 0, 0, 10)
     KeyTitle.Text = "Shoni Hub"
-    KeyTitle.TextColor3 = Color3.fromRGB(255, 0, 0)
+    KeyTitle.TextColor3 = Color3.new(1,1,1)
     KeyTitle.Font = Enum.Font.GothamBlack
     KeyTitle.TextSize = 36
     KeyTitle.BackgroundTransparency = 1
@@ -38,8 +37,8 @@ local function createKeyGui()
     local EnterKeyLabel = Instance.new("TextLabel", KeyFrame)
     EnterKeyLabel.Size = UDim2.new(1, -40, 0, 40)
     EnterKeyLabel.Position = UDim2.new(0, 20, 0, 70)
-    EnterKeyLabel.Text = "Entre la clé ici"
-    EnterKeyLabel.TextColor3 = Color3.new(1, 1, 1)
+    EnterKeyLabel.Text = "Entre ta key pour accéder"
+    EnterKeyLabel.TextColor3 = Color3.new(1,1,1)
     EnterKeyLabel.Font = Enum.Font.GothamBold
     EnterKeyLabel.TextSize = 24
     EnterKeyLabel.BackgroundTransparency = 1
@@ -48,20 +47,18 @@ local function createKeyGui()
     KeyBox.Size = UDim2.new(0, 300, 0, 50)
     KeyBox.Position = UDim2.new(0.5, -150, 0, 110)
     KeyBox.Text = ""
-    KeyBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-    KeyBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    KeyBox.TextColor3 = Color3.fromRGB(0,0,0)
+    KeyBox.BackgroundColor3 = Color3.fromRGB(255,255,255)
     KeyBox.Font = Enum.Font.GothamBold
     KeyBox.TextSize = 20
-    KeyBox.PlaceholderText = "Entre ta clé..."
-    KeyBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
     Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0, 12)
 
     local CheckButton = Instance.new("TextButton", KeyFrame)
     CheckButton.Size = UDim2.new(0, 220, 0, 50)
     CheckButton.Position = UDim2.new(0.5, -110, 0, 170)
-    CheckButton.Text = "Valider"
-    CheckButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-    CheckButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    CheckButton.Text = "Vérifier la Key"
+    CheckButton.TextColor3 = Color3.fromRGB(0,0,0)
+    CheckButton.BackgroundColor3 = Color3.fromRGB(255,255,255)
     CheckButton.Font = Enum.Font.GothamBold
     CheckButton.TextSize = 24
     Instance.new("UICorner", CheckButton).CornerRadius = UDim.new(0, 12)
@@ -70,7 +67,7 @@ local function createKeyGui()
     StatusLabel.Size = UDim2.new(1, 0, 0, 30)
     StatusLabel.Position = UDim2.new(0, 0, 1, -40)
     StatusLabel.Text = ""
-    StatusLabel.TextColor3 = Color3.new(1, 1, 1)
+    StatusLabel.TextColor3 = Color3.new(1,1,1)
     StatusLabel.BackgroundTransparency = 1
     StatusLabel.Font = Enum.Font.GothamBold
     StatusLabel.TextSize = 18
@@ -81,9 +78,8 @@ local function createKeyGui()
         if valid then
             StatusLabel.Text = "Key valide ! Bienvenue boss 🔥"
             StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
-            task.wait(1.5)
+            task.wait(1)
             KeyGui:Destroy()
-            task.wait(0.3)
             loadShoniHub()
         else
             StatusLabel.Text = "Key invalide 😭"
@@ -98,32 +94,15 @@ local function createKeyGui()
 end
 
 function loadShoniHub()
-    -- === WHITELIST (mets ton pseudo Roblox ici en minuscules) ===
-    local MyWhitelist = {
-    "exta1516",  -- original
-    "exta1516", -- TOI (minuscules)
-    "erttggzg876",
-    "potepseudo2",
-    "potepseudo3",
-    -- Ajoute autant : "autrepseudo",
-}
-
+    local Whitelist = {"", "exta1516"}
     local function isWhitelisted(name)
-        if not name then return false end
-        return table.find(Whitelist, string.lower(name)) ~= nil
+        return table.find(Whitelist, name:lower()) ~= nil
     end
 
     if not isWhitelisted(player.Name) and not isWhitelisted(player.DisplayName) then
-        player:Kick("Tu n'es pas dans la whitelist du Shoni Hub.")
+        player:Kick("Pas dans la whitelist")
         return
     end
-
-    -- Notification pour confirmer le chargement
-    StarterGui:SetCore("SendNotification", {
-        Title = "Shoni Hub";
-        Text = "Hub chargé ! Clique sur le bouton rouge SH SHOP en haut à droite.";
-        Duration = 10;
-    })
 
     local backpack = player:WaitForChild("Backpack")
     local char = player.Character or player.CharacterAdded:Wait()
@@ -135,7 +114,7 @@ function loadShoniHub()
     ScreenGui.ResetOnSpawn = false
     ScreenGui.Parent = player.PlayerGui
 
-    -- Bouton rond SH SHOP (haut droite)
+    -- Bouton rond SH SHOP
     local ToggleButton = Instance.new("TextButton")
     ToggleButton.Size = UDim2.new(0, 100, 0, 100)
     ToggleButton.Position = UDim2.new(1, -120, 0, 20)
@@ -148,25 +127,27 @@ function loadShoniHub()
     ToggleButton.BorderSizePixel = 0
     ToggleButton.BackgroundTransparency = 0
     Instance.new("UICorner", ToggleButton).CornerRadius = UDim.new(1, 0)
+
     local stroke = Instance.new("UIStroke", ToggleButton)
     stroke.Color = Color3.fromRGB(255, 0, 0)
     stroke.Thickness = 4
     stroke.Transparency = 0.1
+
     ToggleButton.Parent = ScreenGui
 
-    -- Menu principal (fond ENCORE plus foncé)
+    -- Menu principal (plus petit car on a supprimé le bouton anti-ragdoll)
     local Frame = Instance.new("Frame", ScreenGui)
     Frame.Size = UDim2.new(0, 220, 0, 350)
     Frame.Position = UDim2.new(0.5, -110, 0.5, -175)
-    Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Fond noir
-    Frame.BackgroundTransparency = 0.3  -- <<< ICI : encore plus foncé (avant 0.5, originellement 0.85)
+    Frame.BackgroundColor3 = Color3.fromRGB(0,0,255)
     Frame.Active = true
     Frame.Draggable = true
     Frame.BorderSizePixel = 0
     Frame.Visible = false
     Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 15)
+
     local Stroke = Instance.new("UIStroke", Frame)
-    Stroke.Color = Color3.fromRGB(255, 0, 0)
+    Stroke.Color = Color3.fromRGB(255,0,0)
     Stroke.Thickness = 2
 
     local Title = Instance.new("TextLabel", Frame)
@@ -178,13 +159,13 @@ function loadShoniHub()
     Title.TextSize = 22
     Title.BackgroundTransparency = 1
 
-    -- Boutons du menu
+    -- Boutons
     local Teleport1 = Instance.new("TextButton", Frame)
     Teleport1.Size = UDim2.new(0, 180, 0, 50)
     Teleport1.Position = UDim2.new(0, 20, 0, 60)
-    Teleport1.Text = "📡 Teleport 1"
+    Teleport1.Text = " 📡 Teleport 1"
     Teleport1.TextColor3 = Color3.fromRGB(0,0,0)
-    Teleport1.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+    Teleport1.BackgroundColor3 = Color3.fromRGB(255,255,255)
     Teleport1.Font = Enum.Font.GothamBold
     Teleport1.TextSize = 18
     Instance.new("UICorner", Teleport1).CornerRadius = UDim.new(0, 15)
@@ -192,9 +173,9 @@ function loadShoniHub()
     local Teleport2 = Instance.new("TextButton", Frame)
     Teleport2.Size = UDim2.new(0, 180, 0, 50)
     Teleport2.Position = UDim2.new(0, 20, 0, 120)
-    Teleport2.Text = "📡 Teleport 2"
+    Teleport2.Text = " 📡 Teleport 2"
     Teleport2.TextColor3 = Color3.fromRGB(0,0,0)
-    Teleport2.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+    Teleport2.BackgroundColor3 = Color3.fromRGB(255,255,255)
     Teleport2.Font = Enum.Font.GothamBold
     Teleport2.TextSize = 18
     Instance.new("UICorner", Teleport2).CornerRadius = UDim.new(0, 15)
@@ -288,6 +269,7 @@ function loadShoniHub()
         if plr == player or boxEsps[plr] then return end
         local character = plr.Character
         if not character or not character:FindFirstChild("HumanoidRootPart") then return end
+
         local box = Instance.new("BoxHandleAdornment")
         box.Name = "ShoniBoxESP"
         box.Adornee = character
@@ -302,12 +284,14 @@ function loadShoniHub()
 
     local function createNameESP(plr)
         if plr == player or nameEsps[plr] then return end
+
         local billboard = Instance.new("BillboardGui")
         billboard.AlwaysOnTop = true
         billboard.Size = UDim2.new(0, 200, 0, 80)
         billboard.StudsOffset = Vector3.new(0, 4, 0)
         billboard.Enabled = false
         billboard.Parent = ScreenGui
+
         local nameLabel = Instance.new("TextLabel", billboard)
         nameLabel.Size = UDim2.new(1, 0, 0.5, 0)
         nameLabel.BackgroundTransparency = 1
@@ -318,15 +302,17 @@ function loadShoniHub()
         nameLabel.Font = Enum.Font.GothamBlack
         nameLabel.TextSize = 24
         nameLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+
         local distLabel = Instance.new("TextLabel", billboard)
         distLabel.Size = UDim2.new(1, 0, 0.5, 0)
         distLabel.Position = UDim2.new(0, 0, 0.5, 0)
         distLabel.BackgroundTransparency = 1
         distLabel.TextColor3 = Color3.new(1, 1, 1)
-        distLabel.TextStrokeTransparency = 0.5
+        distLabel.TextStrokeTransparency = 0
         distLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
         distLabel.Font = Enum.Font.GothamBold
         distLabel.TextSize = 20
+
         nameEsps[plr] = {billboard = billboard, distLabel = distLabel}
     end
 
@@ -368,6 +354,7 @@ function loadShoniHub()
         espEnabled = not espEnabled
         ESPToggle.Text = espEnabled and "👁️ ESP : ON" or "👁️ ESP : OFF"
         ESPToggle.BackgroundColor3 = espEnabled and Color3.fromRGB(80, 255, 80) or Color3.fromRGB(255, 80, 80)
+
         if espEnabled then
             for _, plr in Players:GetPlayers() do
                 if plr ~= player then createBoxESP(plr) end
@@ -391,9 +378,12 @@ function loadShoniHub()
         speedBoostActive = not speedBoostActive
         SpeedBoostToggle.Text = speedBoostActive and "⚡ Speed Boost : ON" or "⚡ Speed Boost : OFF"
         SpeedBoostToggle.BackgroundColor3 = speedBoostActive and Color3.fromRGB(80, 255, 80) or Color3.fromRGB(255, 80, 80)
+
         if speedBoostActive then
             local startTime = tick()
+
             if speedConnection then speedConnection:Disconnect() end
+
             speedConnection = RunService.Heartbeat:Connect(function()
                 local elapsed = tick() - startTime
                 if elapsed >= accelerationTime then
@@ -412,7 +402,7 @@ function loadShoniHub()
         end
     end)
 
-    -- TELEPORTS
+    -- Teleports
     local spots1 = {
         CFrame.new(-402.18, -5.34, 131.83) * CFrame.Angles(0, math.rad(-20.08), 0),
         CFrame.new(-416.66, -6.34, -2.05) * CFrame.Angles(0, math.rad(-62.89), 0),
@@ -436,9 +426,12 @@ function loadShoniHub()
     end
 
     local function executeTeleport(spotsTable)
-        if not equipTool() then
-            StarterGui:SetCore("SendNotification", {Title = "Erreur"; Text = "Équipe le Flying Carpet d'abord !"; Duration = 5})
-            return
+        if not equipTool() then return end
+        for _, p in Players:GetPlayers() do
+            if p ~= player then
+                pcall(function() StarterGui:SetCore("PromptBlockPlayer", p) end)
+                break
+            end
         end
         for _, spot in spotsTable do
             hrp.CFrame = spot
@@ -449,19 +442,32 @@ function loadShoniHub()
     Teleport1.MouseButton1Click:Connect(function() executeTeleport(spots1) end)
     Teleport2.MouseButton1Click:Connect(function() executeTeleport(spots2) end)
 
-    -- OUVERTURE / FERMETURE DU MENU
+    -- Toggle menu
     local menuVisible = false
     ToggleButton.MouseButton1Click:Connect(function()
         menuVisible = not menuVisible
         Frame.Visible = menuVisible
         if menuVisible then
-            Frame:TweenSizeAndPosition(UDim2.new(0, 220, 0, 350), UDim2.new(0.5, -110, 0.5, -175), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.3, true)
+            Frame:TweenSizeAndPosition(
+                UDim2.new(0, 220, 0, 350),
+                UDim2.new(0.5, -110, 0.5, -175),
+                Enum.EasingDirection.Out,
+                Enum.EasingStyle.Quad,
+                0.3,
+                true
+            )
         else
-            Frame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.3, true)
+            Frame:TweenSize(
+                UDim2.new(0, 0, 0, 0),
+                Enum.EasingDirection.In,
+                Enum.EasingStyle.Quad,
+                0.3,
+                true
+            )
         end
     end)
 
-    -- Respawn
+    -- Mise à jour du character si respawn
     player.CharacterAdded:Connect(function(newChar)
         char = newChar
         humanoid = newChar:WaitForChild("Humanoid")
@@ -470,5 +476,3 @@ function loadShoniHub()
 end
 
 createKeyGui()
-
-
